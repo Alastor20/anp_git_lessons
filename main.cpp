@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 
 bool isPyth(unsigned a, unsigned b, unsigned c);
 
@@ -11,7 +12,18 @@ int main()
   std::cin >> b;
   while (std::cin >> a)
   {
-    count += isPyth(a, b, c) ? 1 : 0;
+    if (isPyth(a, b, c))
+    {
+      if (std::numeric_limits<size_t>::max() > count)
+      {
+        ++count;
+      }
+      else
+      {
+        std::cerr << "ERROR: overflow" << '\n';
+        return 2;
+      }
+    }
     c = b;
     b = a;
   }
@@ -22,7 +34,7 @@ int main()
   }
   else if (std::cin.fail())
   {
-    std::cerr << "ERROR" << '\n';
+    std::cerr << "ERROR: cant read" << '\n';
     return 1;
   }
 }
