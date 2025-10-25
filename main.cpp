@@ -25,5 +25,8 @@ int main()
 
 bool isPyth(unsigned a, unsigned b, unsigned c)
 {
-  return a * a + b * b == c * c || a * a + c * c == b * b || b * b + c * c == a * a;
+  bool p = a * a + b * b == c * c;
+  p = p || a * a + c * c == b * b;
+  p = p || b * b + c * c == a * a;
+  return p;
 }
