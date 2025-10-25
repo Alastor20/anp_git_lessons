@@ -14,15 +14,12 @@ int main()
   {
     if (isPyth(a, b, c))
     {
-      if (std::numeric_limits<size_t>::max() > count)
-      {
-        ++count;
-      }
-      else
+      if (std::numeric_limits<size_t>::max() == count)
       {
         std::cerr << "ERROR: overflow" << '\n';
         return 2;
       }
+      ++count;
     }
     c = b;
     b = a;
@@ -41,6 +38,18 @@ int main()
 
 bool isPyth(unsigned a, unsigned b, unsigned c)
 {
+  unsigned lim = std::numeric_limits<unsigned>::max();
+  if (lim / a < a || lim / b < b || lim / c < c)
+  {
+    std::cerr << "ERROR: square overflow" << '\n';
+    exit(2);
+  }
+  if (lim - a * a < b * b || lim - b * b < c * c || lim - a * a < c * c)
+  {
+    std::cerr << "ERROR: overflow" << '\n';
+    exit(2);
+  }
+
   bool p = a * a + b * b == c * c;
   p = p || a * a + c * c == b * b;
   p = p || b * b + c * c == a * a;
