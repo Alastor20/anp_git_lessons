@@ -4,15 +4,15 @@ int main()
 {
   using u_t = unsigned;
   u_t a = 0;
-  size_t count = 0;
+  size_t sum = 0;
   while (std::cin >> a)
   {
-    ++count;
+    sum += a * a;
   }
 
   if (std::cin.eof())
   {
-    std::cout << count << '\n';
+    std::cout << sum << '\n';
   }
   else if (std::cin.fail())
   {
