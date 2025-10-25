@@ -1,22 +1,29 @@
 #include <iostream>
 
+bool isPyth(unsigned a, unsigned b, unsigned c);
+
 int main()
 {
   using u_t = unsigned;
-  u_t a = 0;
-  size_t sum = 0;
+  u_t a = 0, b = 0, c = 0;
+  size_t count = 0;
   while (std::cin >> a)
   {
-    sum += a * a;
+    count += isPyth(a, b, c) ? 1 : 0;
   }
 
   if (std::cin.eof())
   {
-    std::cout << sum << '\n';
+    std::cout << count << '\n';
   }
   else if (std::cin.fail())
   {
     std::cerr << "ERROR" << '\n';
     return 1;
   }
+}
+
+bool isPyth(unsigned a, unsigned b, unsigned c)
+{
+  return a * a + b * b == c * c || a * a + c * c == b * b || b * b + c * c == a * a;
 }
